@@ -3,5 +3,6 @@
 		"**/*.bin": true,
 		"**/*.dSYM/": true,
 		"**/*/tempCodeRunnerFile": true
-	}
+	},
+	"editor.formatOnSave": true
 }
