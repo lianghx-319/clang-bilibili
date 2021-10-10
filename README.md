@@ -50,3 +50,17 @@ int main()
     const int a = 1; // `const`
 }
 ```
+
+### String
+
+- clang detect `\0` as the end of a string;
+
+```c
+#include <string.h>
+
+int main()
+{
+    char str[] = "abc"; // str's length in memory is 4 -> ["a", "b", "c", "\0"]
+    strlen(str); // 3
+}
+```
