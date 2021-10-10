@@ -1,26 +1,24 @@
 {
-	"tasks": [
-		{
-			"type": "cppbuild",
-			"label": "C/C++: clang build active file",
-			"command": "/usr/bin/clang",
-			"args": [
-				"-g",
-				"${file}",
-				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}.bin"
-			],
-			"options": {
-				"cwd": "${fileDirname}"
-			},
-			"problemMatcher": [
-				"$gcc"
-			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"detail": "compiler: /usr/bin/clang"
-		}
-	]
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "C/C++: clang build active file",
+      "command": "/usr/bin/clang",
+      "args": [
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}.out"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "compiler: /usr/bin/clang"
+    }
+  ]
 }
