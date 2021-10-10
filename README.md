@@ -20,3 +20,33 @@ The size of type is different between 32bit and 64bit, even different between co
 |     `float`      |     -      |                          -                           |
 |     `double`     |     -      |                          -                           |
 |   `long long`    |     -      |                          -                           |
+
+### Variable
+
+- global variable - define outside of function scope.
+- local variable - define in a function.
+- variable scope - range that can access variable.
+- local variable priority over global variable.
+
+### Constant Variable
+
+- literal
+- `const` defined
+- `enum` defined
+- `#define`
+
+```c
+#define MAX 1000 // #define
+
+enum Sex {
+    MALE, // enum constant variable
+    FEMALE,
+    SECRET
+}
+
+int main()
+{
+    "3.14"; // literal constant variable
+    const int a = 1; // `const`
+}
+```
