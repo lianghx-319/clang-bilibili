@@ -1,2 +1,3 @@
 add_subdirectory(find_odd)
 add_subdirectory(factorial)
+add_subdirectory(binary_search)
