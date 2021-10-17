@@ -1,1 +1,2 @@
 add_subdirectory(find_odd)
+add_subdirectory(factorial)
