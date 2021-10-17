@@ -10,5 +10,9 @@
     "string": "c",
     "string_view": "c",
     "utility": "c"
-  }
+  },
+  "zenMode.centerLayout": false,
+  "zenMode.hideLineNumbers": false,
+  "zenMode.fullScreen": false,
+  "zenMode.hideStatusBar": false
 }
