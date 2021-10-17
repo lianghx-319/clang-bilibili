@@ -9,7 +9,8 @@
     "cwchar": "c",
     "string": "c",
     "string_view": "c",
-    "utility": "c"
+    "utility": "c",
+    "chrono": "c"
   },
   "zenMode.centerLayout": false,
   "zenMode.hideLineNumbers": false,
