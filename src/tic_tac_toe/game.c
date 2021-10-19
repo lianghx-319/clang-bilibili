@@ -1,5 +1,7 @@
 #include "game.h"
 
+static const int COMBO_SIZE = TIC_TAC_TOE_COMBO * 8 - 8 + 1;
+
 void RunGame() {
     // set seed for rand
     srand((unsigned int)time(NULL));
@@ -29,6 +31,56 @@ void Start() {
 
         RobotTurn(board, TIC_TAC_TOE_ROW, TIC_TAC_TOE_COL);
         DisplayBoard(board, TIC_TAC_TOE_ROW, TIC_TAC_TOE_COL);
+    }
+}
+
+int IsWin(char board[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int row, int col) {
+}
+
+void GetComboPosition(int points[COMBO_SIZE][2], int x, int y, int row, int col) {
+    for (int i = 0; i < COMBO_SIZE; i++) {
+        points[i][0] = -1;
+        points[i][1] = -1;
+    }
+
+    int count = 1;
+    points[0][0] = x;
+    points[0][1] = y;
+
+    for (int i = 1; i < COMBO_SIZE; i++) {
+        int points_i[8][2] = {{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}};
+        points_i[0][0] = x + i;
+        points_i[0][1] = y;
+
+        points_i[1][0] = x + i;
+        points_i[1][1] = y + i;
+
+        points_i[2][0] = x;
+        points_i[2][1] = y + i;
+
+        points_i[3][0] = x - i;
+        points_i[3][1] = y - i;
+
+        points_i[4][0] = x - i;
+        points_i[4][1] = y;
+
+        points_i[5][0] = x - i;
+        points_i[5][1] = y + i;
+
+        points_i[6][0] = x;
+        points_i[6][1] = y - i;
+
+        points_i[7][0] = x + i;
+        points_i[7][1] = y - i;
+
+        for (int j = 0; j < 8; j++) {
+            if (points_i[j][0] >= 0 && points_i[j][0] < TIC_TAC_TOE_COMBO
+                && points_i[j][1] >= 0 && points_i[j][1] < TIC_TAC_TOE_COMBO) {
+                points[count][0] = points_i[j][0];
+                points[count][1] = points_i[j][1];
+                count++;
+            }
+        }
     }
 }
 

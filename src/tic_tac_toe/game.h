@@ -4,11 +4,19 @@
 
 #define TIC_TAC_TOE_ROW 3
 #define TIC_TAC_TOE_COL 3
+// win if combo count is n
+#define TIC_TAC_TOE_COMBO 3
 
 enum TIC_TAC_TOE_MARK {
     TIC_TAC_TOE_MARK_X = '*',
     TIC_TAC_TOE_MARK_O = '#',
     TIC_TAC_TOE_MARK_EMPTY = ' ',
+};
+
+enum TIC_TIC_TOE_STATUS {
+    TIC_TAC_TOE_ROBOT_WIN,
+    TIC_TAC_TOE_PLAYER_WIN,
+    TIC_TAC_TOE_DRAW,
 };
 
 // Run game process
@@ -34,3 +42,7 @@ void RobotTurn(char[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int row, int col);
 int IsLegalPosition(int x, int y, int row, int col);
 
 int IsEmptyPosition(char[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int x, int y);
+
+int IsWin(char[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int row, int col);
+
+void GetComboPosition(int[TIC_TAC_TOE_COMBO * 8 - 8 + 1][2], int x, int y, int row, int col);
