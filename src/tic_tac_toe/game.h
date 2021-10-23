@@ -11,6 +11,7 @@ enum TIC_TAC_TOE_MARK {
     TIC_TAC_TOE_MARK_X = '*',
     TIC_TAC_TOE_MARK_O = '#',
     TIC_TAC_TOE_MARK_EMPTY = ' ',
+    TIC_TAC_TOE_MARK_FULL = 'e',
 };
 
 enum TIC_TIC_TOE_STATUS {
@@ -43,6 +44,8 @@ int IsLegalPosition(int x, int y, int row, int col);
 
 int IsEmptyPosition(char[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int x, int y);
 
-int IsWin(char[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int row, int col);
+char IsWin(char[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int row, int col);
 
-void GetComboPosition(int[TIC_TAC_TOE_COMBO * 8 - 8 + 1][2], int x, int y, int row, int col);
+int IsGameDrawn(char[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int row, int col);
+
+void ShowEndMessage(char ret);

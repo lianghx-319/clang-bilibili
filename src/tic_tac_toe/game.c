@@ -1,7 +1,5 @@
 #include "game.h"
 
-static const int COMBO_SIZE = TIC_TAC_TOE_COMBO * 8 - 8 + 1;
-
 void RunGame() {
     // set seed for rand
     srand((unsigned int)time(NULL));
@@ -26,62 +24,78 @@ void Start() {
     InitBoard(board, TIC_TAC_TOE_ROW, TIC_TAC_TOE_COL);
     DisplayBoard(board, TIC_TAC_TOE_ROW, TIC_TAC_TOE_COL);
     while (1) {
+        char ret = TIC_TAC_TOE_MARK_EMPTY;
         PlayerTurn(board, TIC_TAC_TOE_ROW, TIC_TAC_TOE_COL);
         DisplayBoard(board, TIC_TAC_TOE_ROW, TIC_TAC_TOE_COL);
+        ret = IsWin(board, TIC_TAC_TOE_ROW, TIC_TAC_TOE_COL);
+        ShowEndMessage(ret);
+        if (ret != TIC_TAC_TOE_MARK_EMPTY) {
+            break;
+        }
 
         RobotTurn(board, TIC_TAC_TOE_ROW, TIC_TAC_TOE_COL);
         DisplayBoard(board, TIC_TAC_TOE_ROW, TIC_TAC_TOE_COL);
+        ret = IsWin(board, TIC_TAC_TOE_ROW, TIC_TAC_TOE_COL);
+        ShowEndMessage(ret);
+        if (ret != TIC_TAC_TOE_MARK_EMPTY) {
+            break;
+        }
     }
 }
 
-int IsWin(char board[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int row, int col) {
+void ShowEndMessage(char ret) {
+    switch (ret) {
+    case TIC_TAC_TOE_MARK_FULL:
+        printf("The game is drawn.\n");
+        break;
+    case TIC_TAC_TOE_MARK_O:
+        printf("You lose!\n");
+        break;
+    case TIC_TAC_TOE_MARK_X:
+        printf("You win!\n");
+        break;
+    default:
+        break;
+    }
 }
 
-void GetComboPosition(int points[COMBO_SIZE][2], int x, int y, int row, int col) {
-    for (int i = 0; i < COMBO_SIZE; i++) {
-        points[i][0] = -1;
-        points[i][1] = -1;
+char IsWin(char board[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int row, int col) {
+    for (int i = 0; i < row; i++) {
+        if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != TIC_TAC_TOE_MARK_EMPTY) {
+            return board[i][0];
+        }
     }
 
-    int count = 1;
-    points[0][0] = x;
-    points[0][1] = y;
+    for (int j = 0; j < col; j++) {
+        if (board[0][j] == board[1][j] && board[1][j] == board[2][j] && board[0][j] != TIC_TAC_TOE_MARK_EMPTY) {
+            return board[0][j];
+        }
+    }
 
-    for (int i = 1; i < COMBO_SIZE; i++) {
-        int points_i[8][2] = {{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}};
-        points_i[0][0] = x + i;
-        points_i[0][1] = y;
+    if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != ' ') {
+        return board[0][0];
+    }
 
-        points_i[1][0] = x + i;
-        points_i[1][1] = y + i;
+    if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != ' ') {
+        return board[0][2];
+    }
 
-        points_i[2][0] = x;
-        points_i[2][1] = y + i;
+    if (IsGameDrawn(board, row, col)) {
+        return TIC_TAC_TOE_MARK_FULL;
+    } else {
+        return TIC_TAC_TOE_MARK_EMPTY;
+    }
+}
 
-        points_i[3][0] = x - i;
-        points_i[3][1] = y - i;
-
-        points_i[4][0] = x - i;
-        points_i[4][1] = y;
-
-        points_i[5][0] = x - i;
-        points_i[5][1] = y + i;
-
-        points_i[6][0] = x;
-        points_i[6][1] = y - i;
-
-        points_i[7][0] = x + i;
-        points_i[7][1] = y - i;
-
-        for (int j = 0; j < 8; j++) {
-            if (points_i[j][0] >= 0 && points_i[j][0] < TIC_TAC_TOE_COMBO
-                && points_i[j][1] >= 0 && points_i[j][1] < TIC_TAC_TOE_COMBO) {
-                points[count][0] = points_i[j][0];
-                points[count][1] = points_i[j][1];
-                count++;
+int IsGameDrawn(char board[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int row, int col) {
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            if (board[i][j] == TIC_TAC_TOE_MARK_EMPTY) {
+                return 0;
             }
         }
     }
+    return 1;
 }
 
 void PlayerTurn(char board[TIC_TAC_TOE_ROW][TIC_TAC_TOE_COL], int row, int col) {
