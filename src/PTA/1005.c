@@ -38,10 +38,10 @@ int main() {
     if (scanf("%d", &len)) {
         int arr[100] = {0};
         int ret[100] = {0};
-        int hash[150] = {0};
+        int hash[10000] = {0};
         initArr(arr, 100);
         initArr(ret, 100);
-        initArr(hash, 150);
+        initArr(hash, 10000);
         int index = 0;
         for (int i = 0; i < len; i++) {
             if (scanf("%d", &arr[i])) {
